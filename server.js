@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 const projectData = {};
 
 //API Key
-var APIKey = '1aa7b2ca9ad530109d70c085538b2e75';
+var APIKey = '';
 
 const http = require('http');
 const { response } = require('express');
