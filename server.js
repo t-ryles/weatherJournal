@@ -5,71 +5,52 @@ const cors = require('cors');
 const path = require('path');
 const fetch = require("node-fetch");
 
-
-
-//Creat server
 const app = express();
-app.use(express.json());
 
-//parses request body and populates request.body
-app.use(bodyParser.urlencoded({extended: false}));
+//Middleware
+app.use(express.json());
+app.use(cors());
+
+// Body parser middleware
+app.use(express.urlencoded({extended: false}));
 
 //Project Endpoint
 const projectData = {};
 
 //API Key
-var APIKey = '';
+var APIKey = '0f4c4e121f7fc9cce5b749ee1f57fb90';
 
-const http = require('http');
-const { response } = require('express');
+//URL
+const url =`http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=${APIKey}`;
+
+//Server
+// const http = require('http');
+// const { response } = require('express');
 
 const hostname = '127.0.0.1';
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}.`));
 
-app.use(express.static(path.join(__dirname, 'index.html')));
+const newLocal = 'index.html';
+app.use(express.static(path.join(__dirname, newLocal)));
 
 // weatherInfo();
-//var zipCode = '524901';
+// //var zipCode = '524901';
 
 // async function weatherInfo() {
 //   try {
-//       const res = await fetch(`http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=${APIKey}`) 
-//           const data = await res.json();
-//           console.log(data);
+//       const yes = await fetch(`http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=${APIKey}`) 
+//           const data = await yes;
+//           response.send(data);
 //           console.log('Fetch is working');
 //       } catch(e) {
 //         console.log(e);
 //     }
 // };
 
-const url =`http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=${APIKey}`;
+app.get('/index.html', (req, res) => res.render('index', {
+  
+}));
 
-// fetch (URL)
-// .then(data =>({return :data.json()}))
-// .then (res =>{console.log(res)})
-// .catch(error => console.log(error));
-
-const sendHttpRequest = (method, url, data) => {
-  return fetch(url, {
-    method: method,
-    body: JSON.stringify(data),
-    headers : data ? 'Content-Type: application/json' : {}
-  }).then (response => {
-    return response.JSON()
-  });
-};
-
-const getData = () => {
-  sendHttpRequest('GET', url).then(responseData => {
-    console.log(responseData);
-  })
-};
-
-const sendData = () => {
-  sendHttpRequest('POST', url, {
-    zipCode : {},
-    input : ''
-  })
-};
+module.exports = app;
