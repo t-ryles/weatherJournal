@@ -5,8 +5,6 @@ const projectData = {};
 const express = require('express');
 const bodyParser= require('body-parser');
 const cors = require('cors');
-const path = require('path');
-const { response } = require('express');
 const { default: fetch } = require('node-fetch');
 
 const app = express();
