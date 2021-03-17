@@ -6,13 +6,13 @@ const express = require('express');
 const bodyParser= require('body-parser');
 const cors = require('cors');
 const { default: fetch } = require('node-fetch');
+const zipCode = require('./server')
 
 const app = express();
 
 
 //API variables
-var APIKey = '0f4c4e121f7fc9cce5b749ee1f57fb90';
-var zipCode = '68503';
+var APIKey = '';
 
 //URL
 const url =`https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${APIKey}`;
