@@ -15,4 +15,4 @@ function inputZipCode() {
 };
 
 
-module.exports = zipCode;
+module.exports = zipCode.value;

@@ -6,13 +6,16 @@ const express = require('express');
 const bodyParser= require('body-parser');
 const cors = require('cors');
 const { default: fetch } = require('node-fetch');
-const zipCode = require('./server')
+const zipCode = require('./server');
+const { json } = require('body-parser');
 
+
+console.log('this should log the ' + zipCode);
 const app = express();
 
 
 //API variables
-var APIKey = '';
+var APIKey = '568078774ee955d4329869fe95c21137';
 
 //URL
 const url =`https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${APIKey}`;
@@ -40,8 +43,9 @@ weatherData().catch(error => {
 async function weatherData () {
   const res = await fetch(url);
   const data = await res.json();
-  console.log(data.main.temp);
-  console.log(data.main.feels_like);
+  console.log(data);
+  // console.log(data.main.temp);
+  // console.log(data.main.feels_like);
   return data;
 };
 
